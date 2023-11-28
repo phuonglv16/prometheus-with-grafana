@@ -1,0 +1,16 @@
+git 
+#kéo code về 
+git clone url 
+2.tạo project mới 
+tạo project mới 
+git clone url 
+#tạo file code lưu 
+git add .
+git commit -m "node"
+git push origin main 
+3.push code có sẵn 
+git init 
+git add .
+git commit -m "abc"
+git remote add origin url
+git push -u origin master 
