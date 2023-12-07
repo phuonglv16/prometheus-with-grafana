@@ -1,0 +1,51 @@
+Kamailio
+cd /home
+[root@binh-lab home]# yum install -y git gcc gcc-c++ bison flex pcre-devel libcurl-devel jansson-devel
+[root@binh-lab home] cd 
+[root@binh-lab ] cd ..
+[root@binh-lab ] mkdir u01
+[root@binh-lab ] mkdir /u01/source
+#cd /u01/source
+[root@binh-lab source]# git clone https://github.com/kamailio/kamailio kamailio
+[root@binh-lab source]# cd kamailio
+[root@binh-lab kamailio]#  make cfg
+[root@binh-lab kamailio]# vi src/modules.lst
+#Them dialplan
+# the list of extra modules to compile
+include_modules=dialplan
+#save
+[root@binh-lab kamailio]# make include_modules="dialplan" cfg
+[root@binh-lab kamailio]# make PREFIX="/u01/kamailio" include_modules="http_client dispatcher jansson regex" cfg
+[root@binh-lab kamailio]# make all
+
+khong co loi gi 
+
+LD (gcc) [M cfg_db.so]		cfg_db.so
+CC (gcc) [M sqlops.so]		sql_var.o
+CC (gcc) [M sqlops.so]		sql_api.o
+CC (gcc) [M sqlops.so]		sql_trans.o
+CC (gcc) [M sqlops.so]		sqlops.o
+make[3]: `libsrdb1.so.1.0' is up to date.
+LD (gcc) [M sqlops.so]		sqlops.so
+CC (gcc) [M misctest.so]		misctest_mod.o
+LD (gcc) [M misctest.so]		misctest.so
+make[1]: Leaving directory `/home/source/kamailio/src'
+[root@binh-lab kamailio]#
+
+
+[root@binh-lab kamailio]# make Q=0 all
+[root@binh-lab kamailio]# make install
+
+
+[root@binh-lab kamailio]# ls
+etc  lib64  sbin  share
+[root@binh-lab kamailio]#
+
+cai done
+[root@lb-kamailio run]# mkdir -p /var/run/kamailio/
+[root@lb-kamailio ]#cd /u01/kamailio/etc/kamailio 
+[root@lb-kamailio kamailio]#vi kamctlrc
+#sua dong
+STARTOPTIONS="-M 16 -m 1024"
+[root@binh-lab sbin]# /u01/kamailio/sbin/kamctl start
+sửa file config 
